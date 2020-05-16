@@ -2,6 +2,7 @@
 <script>
     var label = @json($labels);
     var data = @json($data);
+    var title = '{{$title}}';
     $(function () {
 
         function randomScalingFactor() {
@@ -34,7 +35,7 @@
                 responsive: true,
                 title: {
                     display: true,
-                    // text: 'title'
+                    text: title
                 },
                 tooltips: {
                     mode: 'index',
@@ -49,14 +50,12 @@
                         display: true,
                         scaleLabel: {
                             display: true,
-                            labelString: '时间间隔'
                         }
                     }],
                     yAxes: [{
                         display: true,
                         scaleLabel: {
                             display: true,
-                            labelString: '实时在线数'
                         }
                     }]
                 }

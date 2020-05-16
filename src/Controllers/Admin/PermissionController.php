@@ -118,7 +118,7 @@ class PermissionController extends Controller
         });
     }
 
-    protected function initForm(Form &$form){
+    protected function initForm(&$form){
         $form->text('slug', trans('admin.slug'))->rules('required');
         $form->text('name', trans('admin.name'))->rules('required');
 
