@@ -4,13 +4,12 @@ namespace AdminBase\Actions\Post;
 
 use AdminBase\Utility\JsonHelper;
 use Encore\Admin\Actions\RowAction;
-use Encore\Admin\Auth\Database\OperationLog;
 
 class LogInput extends RowAction
 {
     public $name = "详细日志";
 
-    public function form(OperationLog $model)
+    public function form($model)
     {
         $input = $model->input;
         if (!JsonHelper::isValidJson($input)) {

@@ -10,17 +10,37 @@ class AES
      * 秘钥
      * @var
      */
-    protected static $key;
+    private $key;
 
     /**
      * 加密方式
      * @var string
      */
-    protected static $method = 'AES-128-CBC';
+    private $method = 'AES-128-CBC';
 
     public function __construct()
     {
-        self::$key = config('custom.aes_key');
+        $this->key = config('custom.aes_key');
+    }
+
+    /**
+     * @param mixed $key
+     * @return self
+     */
+    public function setKey($key): self
+    {
+        $this->key = $key;
+        return $this;
+    }
+
+    /**
+     * @param string $method
+     * @return self
+     */
+    public function setMethod(string $method): self
+    {
+        $this->method = $method;
+        return $this;
     }
 
     /**
@@ -28,9 +48,9 @@ class AES
      * @param string $content 加密内容
      * @return string
      */
-    public static function encrypt($content)
+    public function encrypt($content)
     {
-        $result = openssl_encrypt($content, self::$method, self::$key, OPENSSL_RAW_DATA, self::$key);
+        $result = openssl_encrypt($content, $this->method, $this->key, OPENSSL_RAW_DATA, $this->key);
         return base64_encode($result);
     }
 
@@ -39,9 +59,9 @@ class AES
      * @param string $content 密文
      * @return string
      */
-    public static function decrypt($content)
+    public function decrypt($content)
     {
         $content = base64_decode($content);
-        return openssl_decrypt($content, self::$method, self::$key, OPENSSL_RAW_DATA, self::$key);
+        return openssl_decrypt($content, $this->method, $this->key, OPENSSL_RAW_DATA, $this->key);
     }
 }
