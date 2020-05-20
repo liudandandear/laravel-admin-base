@@ -9,10 +9,6 @@
     ],
     "require": {
         "php" : ">=7.2",
-        "ext-openssl": "*",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-zip": "*",
         "binbinly/google2fa-laravel-admin": "^0.1.0",
         "firebase/php-jwt": "^5.2",
         "laravel/framework": "5.5.*",
