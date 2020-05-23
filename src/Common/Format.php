@@ -136,8 +136,7 @@ class Format
 
     /**
      * 处理数据统计里边的百分比显示
-     * 数据库里存的的扩大10000倍之后的百分比，example：数据库里边的百分比值：10000，前端显示出来的百分比：100.00%
-     * @param int $value $value 处理的数值(百分比)
+     * @param int $value 处理的数值(百分比)
      * @return string
      */
     public static function formatStatPp($value)

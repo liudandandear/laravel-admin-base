@@ -1,14 +1,9 @@
 <canvas id="line" style="width: 100%;height: 600px"></canvas>
-<script>
+<script type="text/javascript">
     var label = @json($labels);
     var data = @json($data);
     var title = '{{$title}}';
     $(function () {
-
-        function randomScalingFactor() {
-            return Math.floor(Math.random() * 100)
-        }
-
         window.chartColors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
@@ -24,7 +19,7 @@
             data: {
                 labels: label,
                 datasets: [{
-                    label: '在线数据',
+                    label: title,
                     fill: false,
                     backgroundColor: window.chartColors.blue,
                     borderColor: window.chartColors.blue,
@@ -61,8 +56,11 @@
                 }
             }
         };
-
         var ctx = document.getElementById('line').getContext('2d');
         new Chart(ctx, config);
     });
+
+    function randomScalingFactor() {
+        return Math.floor(Math.random() * 100)
+    }
 </script>

@@ -2,16 +2,13 @@
     .label {
         cursor: pointer;
     }
-
     .progress {
         display: none;
         margin-bottom: 1rem;
     }
-
     .alert {
         display: none;
     }
-
     .img-container img {
         max-width: 100%;
     }
@@ -177,8 +174,6 @@
                 });
             });
         </script>
-
         @include('admin::form.help-block')
-
     </div>
 </div>

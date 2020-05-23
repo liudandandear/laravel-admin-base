@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,13 +30,10 @@
 </head>
 <body class="hold-transition login-page" @if(config('admin.login_background_image'))style="background: url({{config('admin.login_background_image')}}) no-repeat;background-size: cover;"@endif>
 <div class="login-box">
-    <div class="login-logo">
-        <a href="{{ admin_url('/') }}"><strong>{{config('admin.name')}}</strong></a>
-    </div>
+    <div class="login-logo"><strong style="color:white;">{{config('admin.name')}}</strong></div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">使用恢复代码登陆</p>
-
         <form action="{{ admin_url('auth/recovery') }}" method="post">
             <div class="form-group has-feedback {!! !$errors->has('recovery_code') ?: 'has-error' !!}">
 
@@ -73,19 +70,5 @@
 <script src="{{ admin_asset("vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js")}}"></script>
 <!-- iCheck -->
 <script src="{{ admin_asset("vendor/laravel-admin/AdminLTE/plugins/iCheck/icheck.min.js")}}"></script>
-
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-        $TN.onsuccess(function(){
-            //验证通过
-            $(".tncode").css('border-color', 'green');
-        });
-    });
-</script>
 </body>
 </html>
