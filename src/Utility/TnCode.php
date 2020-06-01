@@ -87,9 +87,7 @@ class TnCode
         $file_mark = public_path() . '/verify/img/mark.png';
         $im = imagecreatefrompng($file_mark);
         header('Content-Type: image/png');
-        //imagealphablending( $im, true);
-        imagecolortransparent($im, 0);//16777215
-        //imagepng($im);exit;
+        imagecolortransparent($im, 0);
         imagecopy($this->im_bg, $im, $this->_x, $this->_y, 0, 0, $this->mark_width, $this->mark_height);
         imagedestroy($im);
     }
@@ -100,9 +98,7 @@ class TnCode
         $img_mark = imagecreatefrompng($file_mark);
         imagecopy($this->im_slide, $this->im_fullbg, 0, $this->_y, $this->_x, $this->_y, $this->mark_width, $this->mark_height);
         imagecopy($this->im_slide, $img_mark, 0, $this->_y, 0, 0, $this->mark_width, $this->mark_height);
-        imagecolortransparent($this->im_slide, 0);//16777215
-        //header('Content-Type: image/png');
-        //imagepng($this->im_slide);exit;
+        imagecolortransparent($this->im_slide, 0);
         imagedestroy($img_mark);
     }
 

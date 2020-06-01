@@ -7,7 +7,7 @@ namespace AdminBase\Common {
         const PASSWORD_ROLES = ['required', 'confirmed', 'min:8', 'max:20', 'regex:/^(\w*(?=\w*\d)(?=\w*[A-Za-z])\w*){8,18}$/'];
         const PASSWORD_ROLES_MSG = ['confirmed' => '两次密码不一样', 'min' => '密码长度8-20', 'max' => '密码过长', 'regex' => '必须包含字母'];
 
-        //恢复代码key
+        //二次登陆 - 恢复代码标识key
         const NEW_RECOVERY_CODE = 'new_recovery_code';
 
         //分页大小

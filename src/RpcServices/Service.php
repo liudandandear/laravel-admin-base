@@ -45,12 +45,13 @@ class Service
      * @return array|bool
      */
     public function send(){
+        $aes = new AES();
         $params = [
             'command' => 1,//1:请求,2:状态rpc 各个服务的状态
             'request' => [
                 'serviceName' => $this->serviceName,
                 'action' => $this->action,//行为名称
-                'arg' => AES::encrypt($this->params)
+                'arg' => $aes->encrypt($this->params)
             ]
         ];
 

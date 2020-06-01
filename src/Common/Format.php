@@ -60,12 +60,17 @@ class Format
     /**
      * 格式化数值，保留两位小数
      * @param $value
+     * @param bool $format 是否格式化为数字字符串
      * @return float
      */
-    public static function formatNumber($value)
+    public static function formatNumber($value, $format = true)
     {
         if ($value == 0) return 0;
-        return number_format(round($value, 2));
+        if ($format) {
+            return number_format(round($value, 2));
+        } else {
+            return round($value, 2);
+        }
     }
 
     /**
@@ -81,16 +86,21 @@ class Format
     /**
      * 格式化为元
      * @param $value
+     * @param bool $format 是否格式化为数字字符串
      * @return float|int
      */
-    public static function formatAmountToYuan($value)
+    public static function formatAmountToYuan($value, $format = true)
     {
         if ($value == 0) return 0;
-        return number_format(round($value / 100, 2));
+        if ($format) {
+            return number_format(round($value / 100, 2));
+        } else {
+            return round($value / 100, 2);
+        }
     }
 
     /**
-     * 格式化数组
+     * 格式化二维数组成key-value一维数组
      * @param $list
      * @param $key
      * @param $value
@@ -141,9 +151,9 @@ class Format
      */
     public static function formatStatPp($value)
     {
-        //先缩小100倍
-        $roundData = round($value / 100, 2);
-        //再格式化千分位+%
-        return sprintf("%.2f", $roundData) . '%';
+        if ($value == 0) {
+            return '0.00%';
+        }
+        return sprintf("%.2f", round($value / 100, 2)) . '%';
     }
 }

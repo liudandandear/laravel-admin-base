@@ -14,7 +14,7 @@ class NewOperationLog extends OperationLog
 
     public static $ROUTE_DO = [
         self::ROUTE_UPDATE => '更新',
-        self::ROUTE_STORE => '新建',
+        self::ROUTE_STORE => '创建',
         self::ROUTE_DESTROY => '删除',
     ];
 }

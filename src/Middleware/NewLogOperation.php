@@ -8,6 +8,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Middleware\LogOperation;
 use Illuminate\Http\Request;
 use ReflectionException;
+use ReflectionClass;
 use Exception;
 
 class NewLogOperation extends LogOperation
@@ -25,7 +26,7 @@ class NewLogOperation extends LogOperation
             if ($routeName == "admin.handle-form") {
                 $className = $request->input('_form_');
                 try {
-                    $class = new \ReflectionClass($className);
+                    $class = new ReflectionClass($className);
                     $title = $class->getProperty('title')->getValue(new $className);
                 } catch (ReflectionException $e) {
                     return $next($request);
@@ -33,7 +34,7 @@ class NewLogOperation extends LogOperation
             } elseif ($routeName == "admin.handle-action") {
                 $className = str_replace('_', '\\', $request->input('_action'));
                 try {
-                    $class = new \ReflectionClass($className);
+                    $class = new ReflectionClass($className);
                     $title = $class->getProperty('name')->getValue(new $className);
                 } catch (ReflectionException $e) {
                     return $next($request);

@@ -56,6 +56,10 @@ class MenuModel extends Menu
         }
     }
 
+    /**
+     * @param $routers
+     * @return array
+     */
     public function formatRouters($routers)
     {
         $newRouters = [];

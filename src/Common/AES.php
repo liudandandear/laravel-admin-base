@@ -3,7 +3,11 @@
 
 namespace AdminBase\Common;
 
-
+/**
+ * AES加密解密
+ * Class AES
+ * @package AdminBase\Common
+ */
 class AES
 {
     /**

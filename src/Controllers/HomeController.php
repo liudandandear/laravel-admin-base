@@ -8,11 +8,12 @@ use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
+use Illuminate\Database\Query\Builder;
 
 class HomeController extends HttpController
 {
     public function index(){
-        $categories = SiteCategory::with(['children' => function ($query) {
+        $categories = SiteCategory::with(['children' => function (Builder $query) {
             $query->orderBy('order');
         }, 'sites'])
             ->withCount('children')

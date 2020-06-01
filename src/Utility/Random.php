@@ -59,13 +59,13 @@ class Random
     static function makeUUIDV4()
     {
         mt_srand((double)microtime() * 10000);
-        $charid = strtolower(md5(uniqid(rand(), true)));
+        $charId = strtolower(md5(uniqid(rand(), true)));
         $hyphen = '-';
         return
-            substr($charid, 0, 8) . $hyphen .
-            substr($charid, 8, 4) . $hyphen .
-            substr($charid, 12, 4) . $hyphen .
-            substr($charid, 16, 4) . $hyphen .
-            substr($charid, 20, 12);
+            substr($charId, 0, 8) . $hyphen .
+            substr($charId, 8, 4) . $hyphen .
+            substr($charId, 12, 4) . $hyphen .
+            substr($charId, 16, 4) . $hyphen .
+            substr($charId, 20, 12);
     }
 }

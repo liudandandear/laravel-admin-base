@@ -6,7 +6,6 @@ use AdminBase\Controllers\HttpController;
 use AdminBase\Utility\Google2FaHelper;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
 use Illuminate\Http\RedirectResponse;
 
@@ -18,7 +17,6 @@ class SecurityController extends HttpController
      * 验证登录
      * @param Request $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
     public function validateTwoFactor(Request $request)
     {
@@ -54,7 +52,6 @@ class SecurityController extends HttpController
      * 登出
      * @param Request $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
     public function deactivateTwoFactor(Request $request)
     {

@@ -8,7 +8,7 @@ use AdminBase\Utility\JsonHelper;
 use Encore\Admin\Form\Field;
 
 /**
- * 树结构
+ * 权限树结构
  * Class TreeCheckBox
  * @package AdminBase\Forms\Field
  */

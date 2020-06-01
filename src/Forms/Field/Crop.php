@@ -9,6 +9,7 @@ use Encore\Admin\Form\Field\ImageField;
 use Encore\Admin\Form\Field\File;
 use Encore\Admin\Admin;
 use Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Crop extends File
 {
@@ -112,8 +113,8 @@ class Crop extends File
     }
 
     /**
-     * @param array|\Symfony\Component\HttpFoundation\File\UploadedFile $base64
-     * @return array|bool|mixed|string|\Symfony\Component\HttpFoundation\File\UploadedFile
+     * @param array|UploadedFile $base64
+     * @return array|bool|mixed|string|UploadedFile
      * @throws Exception
      */
     public function prepare($base64)
