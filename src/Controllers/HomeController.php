@@ -13,7 +13,7 @@ use Illuminate\Database\Query\Builder;
 class HomeController extends HttpController
 {
     public function index(){
-        $categories = SiteCategory::with(['children' => function (Builder $query) {
+        $categories = SiteCategory::with(['children' => function ($query) {
             $query->orderBy('order');
         }, 'sites'])
             ->withCount('children')
