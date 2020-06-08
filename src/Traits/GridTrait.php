@@ -104,6 +104,17 @@ trait GridTrait
     }
 
     /**
+     * 只禁编辑删除操作
+     * @param Grid $grid
+     */
+    protected function disableGridDeleteAndEdit(Grid &$grid){
+        $grid->actions(function (Grid\Displayers\Actions $actions) {
+            $actions->disableEdit();
+            $actions->disableDelete();
+        });
+    }
+
+    /**
      * 只禁删除操作
      * @param Grid $grid
      */
