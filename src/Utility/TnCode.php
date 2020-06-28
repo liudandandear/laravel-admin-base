@@ -79,7 +79,7 @@ class TnCode
         imagecopy($this->im, $this->im_bg, 0, 0, 0, 0, $this->bg_width, $this->bg_height);
         imagecopy($this->im, $this->im_slide, 0, $this->bg_height, 0, 0, $this->mark_width, $this->bg_height);
         imagecopy($this->im, $this->im_fullbg, 0, $this->bg_height * 2, 0, 0, $this->bg_width, $this->bg_height);
-        imagecolortransparent($this->im, 0);//16777215
+        imagecolortransparent($this->im, 0);
     }
 
     private function _createBg()

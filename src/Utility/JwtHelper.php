@@ -7,16 +7,25 @@ use \Firebase\JWT\JWT;
 
 class JwtHelper
 {
-    private static $secret;
+    private $secret;
 
-    private static $sign = 'HS256';
+    private $sign = 'HS256';
 
-    public function __construct()
+    private static $instance;
+
+    private function __construct()
     {
-        self::$secret = config('custom.jwt_key');
+        $this->secret = config('custom.jwt_key');
     }
 
-    public static function encode(array $userData, $expire = 7200){
+    public static function instance(){
+        if (self::$instance instanceof JwtHelper) {
+            return self::$instance;
+        }
+        return new self();
+    }
+
+    public function encode(array $userData, $expire = 7200){
         $now = time();
         $payload = array(
             "iat" => $now,    //发布时间
@@ -30,10 +39,10 @@ class JwtHelper
          * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
          * for a list of spec-compliant algorithms.
          */
-        return JWT::encode($payload, self::$secret);
+        return JWT::encode($payload, $this->secret);
     }
 
-    public static function decode($token){
-        return (array) JWT::decode($token, self::$secret, array(self::$sign));
+    public function decode($token){
+        return (array) JWT::decode($token, $this->secret, array($this->sign));
     }
 }

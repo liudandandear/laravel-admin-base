@@ -4,6 +4,8 @@ namespace AdminBase\Controllers;
 
 use AdminBase\Common\Format;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -49,7 +51,17 @@ class AdminBaseController extends AdminController
     public function index(Content $content)
     {
         $this->params = request()->all();
-        return parent::index($content);
+        /** @var Grid $grid */
+        $grid = $this->grid();
+        if($grid->option('show_exporter')){//导出功能开启，则权限判断是否有权限
+            if(!Admin::user()->can($grid->model()->getTable() . '_export')){//导出权限为数据库表 + '_export'
+                $grid->disableExport();
+            }
+        }
+        return $content
+            ->title($this->title())
+            ->description($this->description['index'] ?? trans('admin.list'))
+            ->body($grid);
     }
 
     /**

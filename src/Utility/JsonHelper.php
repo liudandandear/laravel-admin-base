@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/10/15
- * Time: 11:18
- */
 
 namespace AdminBase\Utility;
 
@@ -61,11 +55,8 @@ class JsonHelper
      */
     public static function decode(string $json, bool $assoc = true)
     {
-        if(!$json) return $json;
+        if(!$json) return [];
 
-        if(!self::isValidJson($json)) {
-            return $json;
-        }
         $result = json_decode($json, $assoc);
 
         if ($result !== null) {
@@ -88,8 +79,8 @@ class JsonHelper
         if (!is_string($strJson)) {
             return false;
         }
-        \json_decode($strJson);
-        return (\json_last_error() === JSON_ERROR_NONE);
+        json_decode($strJson);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
     /**
      * JsonHelper::convertNewLinesToCRLF(array('wo\x0D\x0Arks' => 'fi\x0D\x0Ane'));
