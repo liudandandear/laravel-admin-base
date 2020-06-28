@@ -69,7 +69,7 @@ class Crop extends File
             'cli' => 1,  //客户端id
         ];
 
-        $token = JwtHelper::encode($userData);
+        $token = JwtHelper::instance()->encode($userData);
         $res = HttpHelper::uploadFile($uploadUrl. '/upload?token='.$token, $file_path);
         if ($res) {
             $fileData = JsonHelper::decode($res);
