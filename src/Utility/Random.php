@@ -13,7 +13,7 @@ class Random
      * @return bool|string
      * @author : evalor <master@evalor.cn>
      */
-    static function character($length = 6, $alphabet = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789')
+    public static function character($length = 6, $alphabet = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789')
     {
         mt_srand();
         // 重复字母表以防止生成长度溢出字母表长度
@@ -32,7 +32,7 @@ class Random
      * @return bool|string
      * @author : evalor <master@evalor.cn>
      */
-    static function number($length = 6)
+    public static function number($length = 6)
     {
         return static::character($length, '0123456789');
     }
@@ -42,7 +42,7 @@ class Random
      * @param array $data
      * @return mixed|null
      */
-    static function arrayRandOne(array $data)
+    public static function arrayRandOne(array $data)
     {
         if (empty($data)) {
             return null;
@@ -56,7 +56,7 @@ class Random
      * 有概率重复|短时间内可以认为唯一
      * @return string
      */
-    static function makeUUIDV4()
+    public static function makeUUIDV4()
     {
         mt_srand((double)microtime() * 10000);
         $charId = strtolower(md5(uniqid(rand(), true)));

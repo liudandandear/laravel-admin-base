@@ -3,30 +3,33 @@
 
 namespace AdminBase\Utility;
 
-use Exception;
-
 class HttpHelper
 {
     /**
      * 上传文件
      * @param $url
      * @param $filePath
+     * @param string $err
      * @return bool|string
      */
-    public static function uploadFile($url, $filePath)
+    public static function uploadFile($url, $filePath, &$err = '')
     {
-        $ch = curl_init();
+        $curl = curl_init();
 
         //post数据，使用@符号，curl就会认为是有文件上传
         $curlPost = array('files[]' => new \CURLFile($filePath));
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true); //POST提交
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
-        $data = curl_exec($ch);
-        curl_close($ch);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true); //POST提交
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+        $data = curl_exec($curl);
+        if (curl_error($curl)) {
+            $err = curl_error($curl);
+            return false;
+        }
+        curl_close($curl);
         return $data;
     }
 
@@ -34,10 +37,10 @@ class HttpHelper
      * 发送get请求
      * @param $url
      * @param array $header
+     * @param string $err
      * @return bool|string
-     * @throws Exception
      */
-    public static function get($url, $header = ['Accept: application/json'])
+    public static function get($url, $header = ['Accept: application/json'], &$err = '')
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -54,11 +57,11 @@ class HttpHelper
 
         $data = curl_exec($curl);
         if (curl_error($curl)) {
-            throw new Exception("request get error:".curl_error($curl));
-        } else {
-            curl_close($curl);
-            return $data;
+            $err = curl_error($curl);
+            return false;
         }
+        curl_close($curl);
+        return $data;
     }
 
     /**
@@ -66,10 +69,10 @@ class HttpHelper
      * @param $url
      * @param array $data
      * @param array $header
+     * @param string $err
      * @return array|bool|string
-     * @throws Exception
      */
-    public static function post($url, $data = [], $header = ['Accept: application/json'])
+    public static function post($url, $data = [], $header = ['Accept: application/json'], &$err = '')
     {
         $curl = curl_init();
         //设置抓取的url
@@ -91,10 +94,10 @@ class HttpHelper
 
         $data = curl_exec($curl);
         if (curl_error($curl)) {
-            throw new Exception("request post error:".curl_error($curl));
-        } else {
-            curl_close($curl);
-            return $data;
+            $err = curl_error($curl);
+            return false;
         }
+        curl_close($curl);
+        return $data;
     }
 }

@@ -3,26 +3,20 @@
 
 namespace AdminBase\Utility;
 
+use AdminBase\Traits\Singleton;
 use \Firebase\JWT\JWT;
 
 class JwtHelper
 {
+    use Singleton;
+
     private $secret;
 
     private $sign = 'HS256';
 
-    private static $instance;
-
     private function __construct()
     {
         $this->secret = config('custom.jwt_key');
-    }
-
-    public static function instance(){
-        if (self::$instance instanceof JwtHelper) {
-            return self::$instance;
-        }
-        return new self();
     }
 
     public function encode(array $userData, $expire = 7200){
