@@ -3,7 +3,6 @@
 namespace AdminBase\Controllers\Auth;
 
 use AdminBase\Controllers\HttpController;
-use AdminBase\Utility\Google2FaHelper;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Http\Request;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
@@ -30,7 +29,7 @@ class SecurityController extends HttpController
         ]);
 
         //retrieve secret
-        $secret = $request->session()->pull(Google2FaHelper::$secretSessionKey);
+        $secret = $request->session()->pull(config('google2fa.session_var'));
 
         $authenticator = app(Authenticator::class)->boot($request);
 

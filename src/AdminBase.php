@@ -8,7 +8,7 @@ use Encore\Admin\Extension;
 
 class AdminBase extends Extension
 {
-    public $name = 'setting';
+    public $name = 'base';
 
     public $views = __DIR__.'/../resources/views';
 }

@@ -52,8 +52,8 @@ class AdminBaseServiceProvider extends ServiceProvider
             AdminBase::routes(__DIR__.'/../routes/web.php');
         });
 
-        Storage::extend('admin', function ($app, $config) {
-            $adapter = new FastDFSAdapter($config['root']);
+        Storage::extend('dfs', function ($app, $config) {
+            $adapter = new FastDFSAdapter($config['root'], $config['api']);
             return new Filesystem($adapter);
         });
     }

@@ -23,13 +23,18 @@ class TnCode
     private $bg_height = 150;
     private $mark_width = 50;
     private $mark_height = 50;
-    private $bg_num = 18;
     private $_x = 0;
     private $_y = 0;
+    private $rootPath;
 
-    public function make()
+    public function __construct($rootPath = '')
     {
-        $this->_init();
+        $rootPath == '' && $this->rootPath = public_path();
+    }
+
+    public function make($num = 18)
+    {
+        $this->_init($num);
         $this->_createSlide();
         $this->_createBg();
         $this->_merge();
@@ -37,10 +42,10 @@ class TnCode
         $this->_destroy();
     }
 
-    private function _init()
+    private function _init($num)
     {
-        $bg = random_int(1, $this->bg_num);
-        $file_bg = public_path() . '/verify/bg/' . $bg . '.png';
+        $bg = random_int(1, $num);
+        $file_bg = $this->rootPath . '/verify/bg/' . $bg . '.png';
         $this->im_fullbg = imagecreatefrompng($file_bg);
         $this->im_bg = imagecreatetruecolor($this->bg_width, $this->bg_height);
         imagecopy($this->im_bg, $this->im_fullbg, 0, 0, 0, 0, $this->bg_width, $this->bg_height);
@@ -84,7 +89,7 @@ class TnCode
 
     private function _createBg()
     {
-        $file_mark = public_path() . '/verify/img/mark.png';
+        $file_mark = $this->rootPath . '/verify/img/mark.png';
         $im = imagecreatefrompng($file_mark);
         header('Content-Type: image/png');
         imagecolortransparent($im, 0);
@@ -94,7 +99,7 @@ class TnCode
 
     private function _createSlide()
     {
-        $file_mark = public_path() . '/verify/img/mark2.png';
+        $file_mark = $this->rootPath . '/verify/img/mark2.png';
         $img_mark = imagecreatefrompng($file_mark);
         imagecopy($this->im_slide, $this->im_fullbg, 0, $this->_y, $this->_x, $this->_y, $this->mark_width, $this->mark_height);
         imagecopy($this->im_slide, $img_mark, 0, $this->_y, 0, 0, $this->mark_width, $this->mark_height);

@@ -52,7 +52,7 @@ class RecoveryLoginController extends HttpController
             app('pragmarx.google2fa')->setStateless(false);
             Google2FA::login();
 
-            //更新恢复代理
+            //更新恢复代码
             $newCode = Random::character(32);
             $user->recovery_code = $newCode;
             $user->save();

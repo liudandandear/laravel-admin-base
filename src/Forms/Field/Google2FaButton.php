@@ -6,6 +6,7 @@ namespace AdminBase\Forms\Field;
 use AdminBase\Utility\Google2FaHelper;
 use AdminBase\Utility\Random;
 use Encore\Admin\Form\Field;
+use Google2FA;
 
 class Google2FaButton extends Field
 {
@@ -26,11 +27,16 @@ class Google2FaButton extends Field
             $valid = 1;
             $this->variables = array_merge($this->variables, compact('valid'));
         }else{
-            $secretKey = Google2FaHelper::getSecretKey();
-            $inlineUrl = Google2FaHelper::getInlineUrl($secretKey);
+            $secretKey = Google2FA::generateSecretKey(32);
+            $inlineUrl = Google2FA::getQRCodeInline(
+                config('app.name', 'admin'),
+                config('custom.google2fa_email', 'google2fa@pragmarx.com'),
+                $secretKey,
+                200
+            );
             $valid = 0;
             $recoveryCode = Random::character(32);
-            request()->session()->put(Google2FaHelper::$secretSessionKey, $secretKey);
+            request()->session()->put(config('google2fa.session_var'), $secretKey);
             $this->variables = array_merge($this->variables, compact('secretKey', 'inlineUrl', 'valid', 'recoveryCode'));
         }
         return parent::render();
