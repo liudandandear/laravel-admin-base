@@ -3,7 +3,6 @@
 namespace AdminBase\Controllers\Auth;
 
 use AdminBase\Controllers\HttpController;
-use AdminBase\Models\Admin\User;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Http\Request;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
