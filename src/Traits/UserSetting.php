@@ -88,7 +88,7 @@ trait UserSetting
             $form->divider('基础信息');
             $form->display('username', trans('admin.username'));
             $form->text('name', trans('admin.name'))->required();
-            $form->image('avatar', trans('admin.avatar'));
+            $form->image('avatar', trans('admin.avatar'))->resize(200, 200);
 
             $form->setAction(admin_url('auth/setting'));
         }

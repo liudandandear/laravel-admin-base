@@ -17,7 +17,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">用于二次验证的App</h4>
+                            <h4 class="modal-title" id="myModalLabel" style="color:red">请您用同对待您的密码一样的安全等级来保护您的应急恢复密钥</h4>
                         </div>
                         <div class="modal-body">
                             <textarea class="form-control" rows="3" id="recovery-code">{{$recoveryCode}}</textarea>

@@ -10,7 +10,7 @@ use League\Flysystem\Config;
 use League\Flysystem\Exception;
 
 /**
- * 远程资源路劲适配器
+ * go-fastdfs 适配器
  * Class FastDFSAdapter
  * @package App\Adapters
  */
@@ -36,7 +36,13 @@ class FastDFSAdapter extends AbstractAdapter
     }
 
     public function getUrl($path){
-        return $path;
+        if(strpos($path, 'http://') !== false || strpos($path, 'https://') !== false) {
+            return $path;
+        }else if (strpos($path, 'upload') !== false){
+            return $path;
+        }else{
+            return '/upload/'.$path;
+        }
     }
 
     public function write($path, $contents, Config $config)
