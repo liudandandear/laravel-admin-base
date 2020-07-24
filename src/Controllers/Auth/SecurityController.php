@@ -3,6 +3,7 @@
 namespace AdminBase\Controllers\Auth;
 
 use AdminBase\Controllers\HttpController;
+use AdminBase\Models\Admin\User;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Http\Request;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
@@ -13,7 +14,7 @@ class SecurityController extends HttpController
     const INPUT_KEY = 'one_time_password';
 
     /**
-     * 验证登录
+     * 开启二次验证
      * @param Request $request
      * @return RedirectResponse
      */
@@ -33,22 +34,23 @@ class SecurityController extends HttpController
 
         $authenticator = app(Authenticator::class)->boot($request);
 
-        if ($authenticator->verifyGoogle2FA($secret, (string) $request[self::INPUT_KEY])) {
+        if ($authenticator->verifyGoogle2FA($secret, (string)$request[self::INPUT_KEY])) {
             //encrypt and then save secret
             $user->google2fa_secret = $secret;
             $user->recovery_code = $request['recovery_code'];
+            $user->is_validate = User::IS_CALIDATE_ON;//开启二次登陆验证
             $user->save();
 
             $authenticator->login();
 
             admin_success('操作成功');
-            return back();
+            return redirect('/');
         }
         return $this->error();
     }
 
     /**
-     * 登出
+     * 关闭二次验证
      * @param Request $request
      * @return RedirectResponse
      */
@@ -68,14 +70,15 @@ class SecurityController extends HttpController
         if ($authenticator->verifyGoogle2FA($secret, (string) $request[self::INPUT_KEY])) {
 
             //make secret column blank
-            $user->google2fa_secret = '';
-            $user->recovery_code = '';
-            $user->save();
+//            $user->google2fa_secret = '';
+//            $user->recovery_code = '';
+//            $user->save();
+            User::blank2faToken($user->id);
 
             $authenticator->logout();
 
             admin_success('操作成功');
-            return back();
+            return redirect('/');
         }
         return $this->error();
     }
