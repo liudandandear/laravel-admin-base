@@ -5,6 +5,7 @@ namespace AdminBase\Controllers\Admin;
 
 
 use AdminBase\Common\Constant;
+use AdminBase\Models\Admin\User;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -78,6 +79,8 @@ class UserController extends \Encore\Admin\Controllers\UserController
         $grid->column('roles', trans('admin.roles'))->pluck('name')->label();
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+        $grid->column('is_validate', '二次登录验证')->switch(Constant::TWO_FA_STATUS_SWITCH)->help('超级管理员不需要进行二次验证，其他账户开启即可');
+
 
         return $grid;
     }

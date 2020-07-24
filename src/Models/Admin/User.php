@@ -75,14 +75,4 @@ class User extends Administrator
     {
         return $value ? decrypt($value) : '';
     }
-
-    /**
-     * 关闭二次验证
-     * @param $id
-     */
-    public static function blank2faToken($id)
-    {
-        // 字段：google2fa_secret和recovery_code 置为空，is_validate 置为 0，
-        self::query()->where('id', $id)->update(['google2fa_secret' => '', 'recovery_code' => '', 'is_validate' => self::IS_CALIDATE_OFF]);
-    }
 }
