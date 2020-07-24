@@ -14,7 +14,7 @@ use Exception;
 class MiddlewareCheck2fa
 {
     /**
-     * 操作日志收集
+     * 二次登录验证
      * @param Request $request
      * @param Closure $next
      * @return mixed
