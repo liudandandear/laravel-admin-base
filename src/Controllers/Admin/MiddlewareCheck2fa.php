@@ -29,8 +29,8 @@ class MiddlewareCheck2fa
         if ($user && Admin::user()->isAdministrator()) {
             return $next($request);
         }
-        //如果未开启，所有的路由请求重定向到设置二次验证页面
-        if ($user && $user->is_validate == 0) {
+        //如果未开启，路由正常走
+        if ($user && $user->is_validate == User::IS_CALIDATE_OFF) {
             return $next($request);
         }
 
