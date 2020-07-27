@@ -20,7 +20,7 @@ class LogController extends \Encore\Admin\Controllers\LogController
         $grid = new Grid(new OperationLog());
         $grid->disableExport();
 
-        $grid->model()->orderBy('id', 'DESC');
+        $grid->model()->whereNotNull('do')->orderBy('id', 'DESC');
 
         $grid->column('id', 'ID')->sortable();
         $grid->column('user.name', '用户名称');
